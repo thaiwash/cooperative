@@ -1,0 +1,66 @@
+<html>
+<script src='js/lib/packer.growing.js'></script>
+<script src='js/lib/jquery.js'></script>
+<script src='js/lib/packer.js'></script>
+
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<head>
+<script>
+
+function windowSize() {
+	var win = window
+    var doc = document
+    var docElem = doc.documentElement
+    var body = doc.getElementsByTagName('body')[0]
+    var width = win.innerWidth || docElem.clientWidth || body.clientWidth
+    var height = win.innerHeight|| docElem.clientHeight|| body.clientHeight
+
+	return [width, height]
+}
+
+function init() {
+	var canvas = document.createElement('canvas')
+	
+	var WindowSize = windowSize()
+	size = Math.min(WindowSize[0],WindowSize[1])
+	size = size * 0.9
+	
+	canvas.width = size
+	canvas.height = size
+
+	canvas.style.border = "1px solid #000000"
+
+	canvas.style.position = "absolute"
+	canvas.style.top = ((Math.min(WindowSize[0],WindowSize[1]) - size) * 0.5) + "px"
+	canvas.style.left = (Math.min(WindowSize[0],WindowSize[1]) * 0.95) + "px"
+
+	document.body.appendChild(canvas)
+}
+
+function packer()  {
+  var packer = new Packer(1000, 1000)
+  var blocks = [
+    { w: 100, h: 100 },
+    { w: 100, h: 100 },
+    { w: 100, h: 100 },
+    { w: 100, h: 100 }
+  ];
+
+  blocks.sort(function(a,b) { return (b.h < a.h); }); // sort inputs for best results
+  packer.fit(blocks);
+
+  for(var n = 0 ; n < blocks.length ; n++) {
+    var block = blocks[n];
+	console.log(block)
+    if (block.fit) {
+      //DrawRectangle(block.fit.x, block.fit.y, block.w, block.h);
+    }
+  }
+}
+
+</script>
+
+</head>
+<body onload = "init()">
+</body>
