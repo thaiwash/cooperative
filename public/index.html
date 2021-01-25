@@ -1,97 +1,22 @@
 <html>
-<script src='js/lib/packer.growing.js'></script>
-<!--script src='js/lib/jquery.js'></script-->
-<script src='js/lib/packer.js'></script>
-
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
+
+<script src='js/lib/packer.growing.js'></script>
+<script src='js/lib/packer.js'></script>
+
+<script src='js/act.js'></script>
+<script src='js/interact.js'></script>
+<script src='js/operate.js'></script>
+
 <head>
 <script>
 
-class CooperativeMain {
-	constructor() {
-		console.log("init")
-
-		this.spawnCanvas()
-		this.multiplayerBox()
-	}
-
-	windowSize() {
-		var win = window
-		var doc = document
-		var docElem = doc.documentElement
-		var body = doc.getElementsByTagName('body')[0]
-		var width = win.innerWidth || docElem.clientWidth || body.clientWidth
-		var height = win.innerHeight|| docElem.clientHeight|| body.clientHeight
-
-		return [width, height]
-	}
-	
-	spawnCanvas() {
-		this.canvas = document.createElement('canvas')
-		this.ctx = this.canvas.getContext("2d");
-		
-		this.canvas.onmousemove = function(evt) {
-			console.log(evt)
-		}
-		this.canvas.onmousedown = function(evt) {
-			console.log("hi")
-		}
-		this.canvas.onmouseup = function(evt) {
-			console.log("hi")
-		}
-	
-		var WindowSize = this.windowSize()
-		var size = Math.min(WindowSize[0],WindowSize[1])
-		size = size * 0.9
-		
-		this.boxSize = size
-		
-		this.canvas.width = size
-		this.canvas.height = size
-
-		this.canvas.style.border = "1px solid #000000"
-
-		this.canvas.style.position = "absolute"
-		this.canvas.style.top = ((Math.min(WindowSize[0],WindowSize[1]) - size) * 0.5) + "px"
-		this.canvas.style.left = (Math.min(WindowSize[0],WindowSize[1]) * 0.95) + "px"
-
-		document.body.appendChild(this.canvas)
-		
-
-	}
-	
-	multiplayerBox() {
-		this.ctx.beginPath()
-		this.ctx.strokeStyle = "black"
-		
-		var multiplayerBoxSize = (this.boxSize*0.4)
-		
-		var dimensions = [
-			this.boxSize - multiplayerBoxSize,
-			this.boxSize - multiplayerBoxSize,
-			multiplayerBoxSize,
-			multiplayerBoxSize
-		]
-		
-		this.ctx.rect(
-			dimensions[0],
-			dimensions[1], 
-			dimensions[2], 
-			dimensions[3]
-		)
-		
-		this.ctx.stroke()
-		
-		
-		
-	}
-}
 
 
 
-function init() {
-	var coop = new CooperativeMain()
+function Co() {
+	window.cooperation = new Operate()
 }
 
 
@@ -118,6 +43,18 @@ function packer()  {
 
 </script>
 
+<style>
+    { margin: 0; padding: 0; }
+
+    html { 
+        background: url('img/spacebg2.jpg') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
 </head>
-<body onload = "init()">
+<body onload = "Co()">
 </body>
